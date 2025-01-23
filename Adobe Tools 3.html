@@ -1,0 +1,118 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <script src='file:///android_asset/app.js'></script>
+    <script src='Tools.js'></script>
+	<link href="Tools.css" rel="stylesheet" type="text/css" />
+    </head>
+	<script>
+
+		var ip, port, path, server, accordion, mega;
+		
+    //Called after application is started.
+    function OnStart()
+    {
+    ip = app.GetIPAddress();
+    //app.SetClipboardText( ip );
+    //app.Exit();
+    port = 7169;
+    path = app.GetAppPath().replace("/sdcard", "/storage/emulated/0");
+    alert("App Path:\n"+path);
+    server = app.CreateWebServer( ip, "ListDir" );
+    server.SetFolder( path );
+    server.Start();
+    mega = document.getElementById("Mega");
+    app.ShowPopup("Mega Div: \n" + mega.src);
+    mega.src="http://"+ip+":"+port+"/";//Mega.html";;
+         //app.ShowPopup( "HTML Rocks!" );
+        app.ShowPopup( "Mega Div: \n" + mega.src);
+        //CreateToolsJS();
+        //CreateToolsCSS();
+    }
+    
+    //Routine to rewrite and unification of the script.
+    function CreateToolsJS()
+{
+	app.DeleteFile( app.GetAppPath()+"/Tools.js" );
+	spry = app.ListFolder( app.GetAppPath()+"/Js", ".js", 0, "AlphaSort, FullPath" ); //
+	for(index=0;index<spry.length;index++){
+		//if(spry[index] != app.GetAppPath()+ "/Js/SpryCSVDataSet.js"){
+		content = app.ReadFile( spry[index] ).split("Spry").join("Tools") + "\n";
+		app.WriteFile( app.GetAppPath()+"/Tools.js", content, "Append" );
+		//}
+	}
+}
+
+//Routine to rewrite and unification of the css files.
+    function CreateToolsCSS()
+{
+	app.DeleteFile( app.GetAppPath()+"/Tools.css" );
+	spry = app.ListFolder( app.GetAppPath()+"/Css", ".css", 0, "AlphaSort, FullPath" ); //
+	for(index=0;index<spry.length;index++){
+		//if(spry[index] != app.GetAppPath()+ "/Js/SpryCSVDataSet.js"){
+		content = app.ReadFile( spry[index] ).split("Spry").join("Tools") + "\n";
+		app.WriteFile( app.GetAppPath()+"/Tools.css", content, "Append" );
+		//}
+	}
+}
+
+</script>
+
+<style>
+	body { background-color: #ffffff; }
+    .hello 
+    { 
+        font-size: 22px; 
+        width: 100%;
+        margin-top: 2em;
+        text-align: center;
+        color: navy;
+        text-shadow: 0 0 4px yellow;
+    }
+</style>
+
+<body onLoad="app.Start();" onError="return '';">
+
+	<div class=hello> PR Radio Stations </div>
+	
+	<div id="Puerto_Rico-Stations" class="Accordion">
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab"><img height="18" style="float:left; clear:both" hspace="1" vspace="1" src="Img/2AYMzGcKVm.png" />La Mega (106.9 fm)</div>
+    <div class="AccordionPanelContent">
+    	<iframe id="Mega" width="100%" height="180" style="overflow:scroll;" frameborder="0"></iframe>
+    </div>
+  </div>
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Panel 2</div>
+    <div class="AccordionPanelContent">
+
+    ...
+
+    </div>
+  </div>
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Panel 3</div>
+    <div class="AccordionPanelContent">
+
+    ...
+
+    </div>
+  </div>
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Panel 4</div>
+    <div class="AccordionPanelContent">
+
+    ...
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+accordion = new Tools.Widget.Accordion("Puerto_Rico-Stations");
+//var acc1 = new Tools.Widget.Accordion("Acc1");
+//var MenuBar7 = new Tools.Widget.MenuBar("MenuBar7", {imgDown:"../../widgets/menubar/SpryMenuBarDownHover.gif", imgRight:"../../widgets/menubar/SpryMenuBarRightHover.gif"});
+</script>
+	
+</body>
+</html>
