@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <script src='file:///android_asset/app.js'></script>
+    <script src="ds:/Sys/app.js"></script>
     <script src='Tools.js'></script>
 	<link href="Tools.css" rel="stylesheet" type="text/css" />
     </head>
@@ -15,9 +15,9 @@
     ip = app.GetIPAddress();
     //app.SetClipboardText( ip );
     //app.Exit();
-    port = 7169;
+    port = 8169;
     path = app.GetAppPath().replace("/sdcard", "/storage/emulated/0");
-    alert("App Path:\n"+path);
+    //alert("App Path:\n"+path);
     server = app.CreateWebServer( ip, "ListDir" );
     server.SetFolder( path );
     server.Start();
@@ -25,7 +25,7 @@
     app.ShowPopup("Mega Div: \n" + mega.src);
     mega.src="http://"+ip+":"+port+"/";//Mega.html";;
          //app.ShowPopup( "HTML Rocks!" );
-        app.ShowPopup( "Mega Div: \n" + mega.src);
+       // app.ShowPopup( "Mega Div: \n" + mega.src);
         //CreateToolsJS();
         //CreateToolsCSS();
     }
@@ -84,17 +84,22 @@
   </div>
   <div class="AccordionPanel">
     <div class="AccordionPanelTab">Panel 2</div>
-    <div class="AccordionPanelContent">
-
-    ...
+    <div class="AccordionPanelContent"><br>
+    <a onclick="accordion.openPanel(0);"><center>Prev Tab</a>
+   |	
+<a onclick="accordion.openPanel(2);">Next Tab</a></center>
+   
 
     </div>
   </div>
   <div class="AccordionPanel">
     <div class="AccordionPanelTab">Panel 3</div>
     <div class="AccordionPanelContent">
-
-    ...
+ <a onclick="accordion.openPanel(1);">
+   <center>Prev Tab</a>
+   |	
+<a onclick="accordion.openPanel(3);">Next Tab</a></center>
+   
 
     </div>
   </div>
